@@ -14,43 +14,4 @@ export const validateSchema = (schema: ObjectSchema) => {
     };
 };
 
-export const Schemas = {
-    student: {
-        create: Joi.object().keys({
-            studentId: Joi.string().required(),
-            studentQRCode: Joi.string().required(),
-            firstName: Joi.string().required(),
-            lastName: Joi.string().required(),
-            age: Joi.number().required(),
-            grade: Joi.string().required(),
-            address: {
-                street: Joi.string().required(),
-                city: Joi.string().required(),
-                state: Joi.string().required(),
-                zipCode: Joi.string().required()
-            },
-            contact: {
-                email: Joi.string().required(),
-                phone: Joi.string().required()
-            }
-        }),
-        update: Joi.object().keys({
-            studentId: Joi.string().required(),
-            studentQRCode: Joi.string().required(),
-            firstName: Joi.string().required(),
-            lastName: Joi.string().required(),
-            age: Joi.number().required(),
-            grade: Joi.string().required(),
-            address: {
-                street: Joi.string().required(),
-                city: Joi.string().required(),
-                state: Joi.string().required(),
-                zipCode: Joi.string().required()
-            },
-            contact: {
-                email: Joi.string().required(),
-                phone: Joi.string().required()
-            }
-        })
-    }
-};
+export const Schemas = {};
