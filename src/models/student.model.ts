@@ -43,4 +43,6 @@ const StudentSchema = new Schema<IStudent>(
     { timestamps: true }
 );
 
-export const StudentModel = model<IStudent>('Student', StudentSchema);
+const StudentModel = model<IStudent>('Student', StudentSchema);
+
+export default StudentModel;
