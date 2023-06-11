@@ -2,6 +2,12 @@
     "name": "nodejs-typescript-boilerplate",
     "version": "1.0.1",
     "description": "",
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    ],
     "main": "src/server.js",
     "scripts": {
         "build": "rm -rf build/ && tsc",
