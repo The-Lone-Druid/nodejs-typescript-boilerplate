@@ -14,7 +14,7 @@ mongoose
         w: 'majority'
     } as mongoose.ConnectOptions)
     .then(() => {
-        Logging.info('Connected to MongoDB');
+        Logging.info(`Connected to MongoDB - ${config.server.env} environment`);
         StartServer();
     })
     .catch((err: any) => {

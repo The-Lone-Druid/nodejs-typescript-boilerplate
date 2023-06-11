@@ -11,7 +11,7 @@ const MONGO_CLUSTER_NAME = process.env.MONGO_CLUSTER_NAME || '';
 const MONGO_URL =
     NODE_ENV === 'production'
         ? `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_CLUSTER_NAME}.kqfywwj.mongodb.net/`
-        : 'http://localhost:27017';
+        : 'mongodb://localhost:27017';
 
 const SERVER_PORT = process.env.SERVER_PORT
     ? Number(process.env.SERVER_PORT)
@@ -22,6 +22,7 @@ export const config = {
         url: MONGO_URL
     },
     server: {
-        port: SERVER_PORT
+        port: SERVER_PORT,
+        env: NODE_ENV
     }
 };
