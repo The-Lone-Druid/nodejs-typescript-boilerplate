@@ -43,6 +43,11 @@ const createUserController = async (
     res: Response
 ): Promise<void> => {
     try {
+        if (await UserServices.checkUserExists(req.body.email)) {
+            res.status(400).json({ error: 'User already exists' });
+            return;
+        }
+
         const newUser = req.body;
         const hashedPassword = await bcrypt.hash(newUser.password, 10);
 

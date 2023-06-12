@@ -1,6 +1,11 @@
 import { PaginationParams } from '../../middleware/pagination.middleware';
 import { IUser, UserModel } from '../../models/user/user.model';
 
+const checkUserExists = async (email: string): Promise<boolean> => {
+    const existingUser = await UserModel.findOne({ email }).exec();
+    return !!existingUser;
+};
+
 const getAllUsers = async (pagination: PaginationParams): Promise<IUser[]> => {
     const { page, limit } = pagination;
     const skipCount = (page - 1) * limit;
@@ -30,4 +35,11 @@ const deleteUser = async (userId: string): Promise<IUser | null> => {
     return UserModel.findByIdAndDelete(userId).exec();
 };
 
-export default { getAllUsers, getUserById, createUser, updateUser, deleteUser };
+export default {
+    checkUserExists,
+    getAllUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser
+};
