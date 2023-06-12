@@ -1,17 +1,18 @@
-import Joi, { ObjectSchema } from 'joi';
-import { NextFunction, Response, Request } from 'express';
-import Logging from '../library/logging';
+import { Request, Response, NextFunction } from 'express';
+import { UserSchema } from '../models';
 
-export const validate = (schema: ObjectSchema) => {
-    return async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            await schema.validateAsync(req.body);
-            next();
-        } catch (error: any) {
-            Logging.error(error);
-            res.status(400).json({ error: error.message });
-        }
-    };
+const validateUser = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): void => {
+    const { error } = UserSchema.validate(req.body, { abortEarly: false });
+    if (error) {
+        const errorMessages = error.details.map((err) => err.message);
+        res.status(400).json({ error: errorMessages });
+        return;
+    }
+    next();
 };
 
-export const Schemas = {};
+export { validateUser };

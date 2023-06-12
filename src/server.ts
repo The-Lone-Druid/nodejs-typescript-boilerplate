@@ -3,18 +3,21 @@ import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config';
 import Logging from './library/logging';
-import { StudentRoutes } from './routes';
+import { UserRoutes } from './routes';
 
 const router = express();
 
 // Connect to MongoDB
 mongoose
     .connect(config.mongo.url, {
+        dbName: config.mongo.dbName,
         retryWrites: true,
         w: 'majority'
     } as mongoose.ConnectOptions)
     .then(() => {
-        Logging.info(`Connected to MongoDB - ${config.server.env} environment`);
+        Logging.info(
+            `Connected to MongoDB - ${config.server.env.toUpperCase()} environment.`
+        );
         StartServer();
     })
     .catch((err: any) => {
@@ -68,7 +71,7 @@ const StartServer = () => {
     });
 
     // Use all your routes here
-    router.use('/students', StudentRoutes);
+    router.use('/users', UserRoutes);
 
     // Health check
     router.get('/ping', (req, res, next) => {
